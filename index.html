@@ -1,278 +1,640 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Ahmad Yusuf</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font-style/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #e3effd;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmad Yusuf — Portfolio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            serif: ['DM Serif Display', 'serif'],
+          },
+          colors: {
+            sky: { DEFAULT: '#4BAFD6', light: '#7DCBEA', dark: '#2D8FB5' },
+            ink: '#1A1A2E',
+            mist: '#EFF4F8',
+            steel: '#8A9BB0',
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.7s ease forwards',
+            'fade-in': 'fadeIn 0.5s ease forwards',
+            'slide-in': 'slideIn 0.6s ease forwards',
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            slideIn: { '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
+          }
         }
-        .minimal-input {
-            border: none;
-            border-bottom: 1.5px solid #707070;
-            border-radius: 0;
-            padding: 8px 0;
-            background: transparent !important;
-            color: #1e293b;
-            transition: all 0.3s ease;
-        }
-        .minimal-input:focus {
-            outline: none;
-            border-bottom-color: #2da5da;
-        }
-        .minimal-input::placeholder {
-            color: #94a3b8;
-        }
-        
-        /* Segitiga siku-siku untuk background card solusi */
-        .triangle-bg-1 {
-            background: linear-gradient(to top right, #7bc855 50%, transparent 50%);
-        }
-        .triangle-bg-2 {
-            background: linear-gradient(to top right, #138343 50%, transparent 50%);
-        }
-        .triangle-bg-3 {
-            background: linear-gradient(to top right, #2452a0 50%, transparent 50%);
-        }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: #EFF4F8; }
+
+    /* Login Page */
+    #login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #C8DCEC; position: relative; overflow: hidden; }
+    #login-page::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, #9ACDE4 0%, transparent 70%); top: -100px; left: -100px; pointer-events: none; }
+    #login-page::after { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, #B8D8EE 0%, transparent 70%); bottom: -60px; right: -60px; pointer-events: none; }
+
+    .login-card { background: white; border-radius: 2px; overflow: hidden; box-shadow: 0 20px 60px rgba(30,60,90,0.12); animation: fadeUp 0.7s ease forwards; }
+
+    .input-underline { border: none; border-bottom: 1.5px solid #CBD5E1; outline: none; width: 100%; padding: 10px 0; font-size: 15px; color: #1A1A2E; background: transparent; transition: border-color 0.3s; font-family: 'DM Sans', sans-serif; }
+    .input-underline::placeholder { color: #94A3B8; font-weight: 400; }
+    .input-underline:focus { border-bottom-color: #4BAFD6; }
+
+    .login-btn { background: #4BAFD6; color: white; border: none; width: 100%; padding: 14px; font-size: 16px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.25s, transform 0.15s; letter-spacing: 0.02em; border-radius: 1px; }
+    .login-btn:hover { background: #2D8FB5; transform: translateY(-1px); }
+    .login-btn:active { transform: translateY(0); }
+
+    /* Portfolio Page */
+    #portfolio-page { display: none; }
+    .nav-link { position: relative; font-size: 14px; color: #8A9BB0; font-weight: 500; transition: color 0.2s; text-decoration: none; }
+    .nav-link:hover, .nav-link.active { color: #1A1A2E; }
+    .nav-link.active::after { content: ''; display: block; width: 100%; height: 2px; background: #4BAFD6; border-radius: 2px; margin-top: 2px; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .skill-bar { height: 4px; background: #E2EAF2; border-radius: 4px; overflow: hidden; }
+    .skill-fill { height: 100%; background: linear-gradient(90deg, #4BAFD6, #7DCBEA); border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+    .project-card { background: white; border-radius: 2px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; border: 1px solid #E8EFF5; }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(30,60,90,0.10); }
+
+    .tag { background: #EFF4F8; color: #4BAFD6; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; display: inline-block; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .contact-input { width: 100%; border: 1.5px solid #E2EAF2; border-radius: 2px; padding: 12px 16px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: #1A1A2E; transition: border-color 0.25s; outline: none; background: white; }
+    .contact-input:focus { border-color: #4BAFD6; }
+
+    .send-btn { background: #1A1A2E; color: white; border: none; padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.25s, transform 0.15s; letter-spacing: 0.04em; }
+    .send-btn:hover { background: #4BAFD6; transform: translateY(-1px); }
+
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid #E2EAF2; border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 600; color: #4BAFD6; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4BAFD6; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: #4BAFD6; border: 2px solid white; box-shadow: 0 0 0 3px #C8DCEC; flex-shrink: 0; margin-top: 4px; }
+    .timeline-line { width: 1px; background: #D6E4EE; margin: 4px auto; }
+
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: #C8DCEC; border-radius: 4px; }
+
+    @media (max-width: 640px) {
+      .login-card { width: calc(100vw - 32px); margin: 0 16px; }
+    }
+    .error-msg { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; }
+  </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-0 md:p-4">
+<body>
 
-    <div id="loginForm" class="w-[420px] bg-white rounded-[4px] shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
-        <div class="p-10 pb-6 flex-1">
-            <h1 class="text-[44px] font-bold text-black leading-tight tracking-tight">Hello,</h1>
-            <h1 class="text-[44px] font-bold text-[#2da5da] leading-none tracking-tight mb-12">Friend!</h1>
-            
-            <form onsubmit="handleLogin(event)" class="space-y-8">
-                <div class="flex flex-col">
-                    <input type="text" id="login-username" required placeholder="Name" 
-                        class="w-full minimal-input text-lg font-light">
-                </div>
-                <div class="flex flex-col">
-                    <input type="password" id="login-password" required placeholder="Create Password" 
-                        class="w-full minimal-input text-lg font-light">
-                </div>
-                
-                <div class="pt-6">
-                    <button type="submit" class="w-full py-3.5 bg-[#2da5da] hover:bg-[#218dbb] text-white font-normal text-lg rounded-[2px] transition duration-200">
-                        Login
-                    </button>
-                </div>
-            </form>
+<!-- ===================== LOGIN PAGE ===================== -->
+<div id="login-page">
+  <div class="login-card w-full max-w-sm mx-4" style="width:380px;">
+
+    <!-- ===== REGISTER FORM ===== -->
+    <div id="register-form">
+      <div class="p-10 pb-8">
+        <div class="mb-10">
+          <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-1">Hello,</h1>
+          <h1 class="text-4xl font-bold leading-tight" style="color:#4BAFD6;">Friend!</h1>
+          <p class="text-xs mt-3" style="color:#94A3B8;">Buat akun untuk mengakses portfolio</p>
         </div>
-        
-        <div class="bg-[#e9e9e9] py-4 text-center border-t border-gray-200">
-            <p class="text-xs text-gray-600">
-                Belum punya akun? <a href="#" onclick="toggleAuth('register')" class="text-[#2da5da] hover:underline font-medium">Daftar Sekarang</a>
-            </p>
+        <div class="space-y-6">
+          <div>
+            <input type="text" id="reg-name" class="input-underline" placeholder="Name" autocomplete="off" />
+          </div>
+          <div>
+            <input type="email" id="reg-email" class="input-underline" placeholder="Email" autocomplete="off" />
+          </div>
+          <div>
+            <input type="password" id="reg-pass" class="input-underline" placeholder="Create Password" />
+          </div>
+          <div>
+            <input type="password" id="reg-pass2" class="input-underline" placeholder="Confirm Password" />
+          </div>
+          <div class="error-msg" id="reg-error"></div>
+          <div class="pt-1">
+            <button class="login-btn" onclick="handleRegister()">Daftar Sekarang</button>
+          </div>
         </div>
+      </div>
+      <div class="px-10 py-5" style="background:#F5F0EB;">
+        <p class="text-sm text-center" style="color:#888;">
+          Sudah punya akun? <a href="#" class="font-semibold" style="color:#4BAFD6;" onclick="event.preventDefault(); switchToLogin()">Login di sini</a>
+        </p>
+      </div>
     </div>
 
-
-    <div id="registerForm" class="w-[420px] bg-white rounded-[4px] shadow-2xl overflow-hidden flex flex-col hidden transition-all duration-300">
-        <div class="p-10 pb-6 flex-1">
-            <h1 class="text-[44px] font-bold text-black leading-tight tracking-tight">Join,</h1>
-            <h1 class="text-[44px] font-bold text-[#2da5da] leading-none tracking-tight mb-12">Us!</h1>
-            
-            <form onsubmit="handleRegister(event)" class="space-y-8">
-                <div class="flex flex-col">
-                    <input type="text" id="reg-username" required placeholder="Create Username" 
-                        class="w-full minimal-input text-lg font-light">
-                </div>
-                <div class="flex flex-col">
-                    <input type="password" id="reg-password" required placeholder="Create Password" 
-                        class="w-full minimal-input text-lg font-light">
-                </div>
-                
-                <div class="pt-6">
-                    <button type="submit" class="w-full py-3.5 bg-[#2da5da] hover:bg-[#218dbb] text-white font-normal text-lg rounded-[2px] transition duration-200">
-                        Register
-                    </button>
-                </div>
-            </form>
+    <!-- ===== LOGIN FORM ===== -->
+    <div id="login-form" style="display:none;">
+      <div class="p-10 pb-8">
+        <div class="mb-10">
+          <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-1">Welcome</h1>
+          <h1 class="text-4xl font-bold leading-tight" style="color:#4BAFD6;">Back!</h1>
+          <p class="text-xs mt-3" style="color:#94A3B8;">Masuk dengan akun yang sudah terdaftar</p>
         </div>
-        
-        <div class="bg-[#e9e9e9] py-4 text-center border-t border-gray-200">
-            <p class="text-xs text-gray-600">
-                Sudah punya akun? <a href="#" onclick="toggleAuth('login')" class="text-[#2da5da] hover:underline font-medium">Login di sini</a>
-            </p>
+        <div class="space-y-6">
+          <div>
+            <input type="email" id="login-email" class="input-underline" placeholder="Email" autocomplete="off" />
+          </div>
+          <div>
+            <input type="password" id="login-pass" class="input-underline" placeholder="Password" />
+          </div>
+          <div class="error-msg" id="login-error"></div>
+          <div class="pt-1">
+            <button class="login-btn" onclick="handleLogin()">Login</button>
+          </div>
         </div>
+      </div>
+      <div class="px-10 py-5" style="background:#F5F0EB;">
+        <p class="text-sm text-center" style="color:#888;">
+          Belum punya akun? <a href="#" class="font-semibold" style="color:#4BAFD6;" onclick="event.preventDefault(); switchToRegister()">Daftar Sekarang</a>
+        </p>
+      </div>
     </div>
 
+  </div>
+</div>
 
-    <div id="portfolioPage" class="w-full max-w-[1200px] bg-white shadow-2xl p-6 md:p-12 hidden transition-all duration-500 my-4 md:my-8 rounded-lg">
-        
-        <header class="flex justify-between items-end pb-4 border-b border-black mb-12">
-            <div class="text-[32px] font-bold tracking-tight text-black">
-                AY<span class="text-[#2da5da]">.</span>
+<!-- ===================== PORTFOLIO PAGE ===================== -->
+<div id="portfolio-page">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:#053649;">AY</div>
+        <span class="font-semibold text-sm text-gray-900">Ahmad Yusuf</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-8">
+        <a class="nav-link active" onclick="showSection('home', this)">Home</a>
+        <a class="nav-link" onclick="showSection('about', this)">About</a>
+        <a class="nav-link" onclick="showSection('projects', this)">Projects</a>
+        <a class="nav-link" onclick="showSection('contact', this)">Contact</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <!-- Mobile menu -->
+        <button class="sm:hidden text-gray-500" onclick="toggleMobileMenu()">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <button onclick="logout()" class="text-xs font-medium text-steel hover:text-red-400 transition-colors hidden sm:block">Logout</button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden sm:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-4">
+      <a class="block nav-link" onclick="showSection('home', this); toggleMobileMenu()">Home</a>
+      <a class="block nav-link" onclick="showSection('about', this); toggleMobileMenu()">About</a>
+      <a class="block nav-link" onclick="showSection('projects', this); toggleMobileMenu()">Projects</a>
+      <a class="block nav-link" onclick="showSection('contact', this); toggleMobileMenu()">Contact</a>
+      <a class="block text-xs font-medium text-red-400" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-6 pt-28 pb-20">
+
+    <!-- HOME SECTION -->
+    <div id="section-home" class="section active">
+      <div class="min-h-[70vh] flex flex-col justify-center">
+        <div class="animate-fade-up">
+          <div class="hero-badge mb-8">Available for Projects</div>
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl text-ink leading-tight mb-6">
+            Ahmad<br /><span style="color:#4BAFD6;">Yusuf.</span>
+          </h1>
+          <p class="text-steel text-lg sm:text-xl font-light max-w-lg leading-relaxed mb-10">
+            Technical Engineer di <span class="text-ink font-medium">PT Maximus Teknologi Indonesia</span> — membangun solusi teknis yang andal, efisien, dan inovatif.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button onclick="showSection('projects', document.querySelector('[onclick*=projects]'))" class="px-8 py-3 text-white text-sm font-semibold transition-all hover:-translate-y-0.5" style="background:#4BAFD6; border-radius:2px;">Lihat Projects</button>
+            <button onclick="showSection('contact', document.querySelector('[onclick*=contact]'))" class="px-8 py-3 text-ink text-sm font-semibold border border-gray-200 transition-all hover:border-sky hover:-translate-y-0.5 bg-white" style="border-radius:2px;">Hubungi Saya</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-6 mt-20 pt-12 border-t border-gray-100">
+          <div>
+            <p class="text-3xl font-serif text-ink mb-1">5+</p>
+            <p class="text-xs text-steel font-medium uppercase tracking-wider">Tahun Pengalaman</p>
+          </div>
+          <div>
+            <p class="text-3xl font-serif text-ink mb-1">30+</p>
+            <p class="text-xs text-steel font-medium uppercase tracking-wider">Project Selesai</p>
+          </div>
+          <div>
+            <p class="text-3xl font-serif text-ink mb-1">15+</p>
+            <p class="text-xs text-steel font-medium uppercase tracking-wider">Klien Puas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <div id="section-about" class="section">
+      <div class="mb-12">
+        <p class="text-xs text-sky font-semibold uppercase tracking-widest mb-3">Tentang Saya</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-ink mb-6">Latar Belakang</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-16">
+        <div>
+          <!-- Avatar placeholder -->
+          <div class="w-full aspect-square max-w-xs rounded-2px overflow-hidden mb-8 relative" style="border-radius:2px; background: linear-gradient(135deg, #C8DCEC 0%, #EFF4F8 100%);">
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <div class="w-24 h-24 rounded-full mb-4 flex items-center justify-center text-4xl font-serif text-white" style="background:#4BAFD6;">AY</div>
+              <p class="text-ink font-semibold text-lg">Ahmad Yusuf</p>
+              <p class="text-steel text-sm">Technical Engineer</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-steel leading-relaxed mb-6">
+            Seorang <span class="text-ink font-medium">Technical Engineer</span> berpengalaman di PT Maximus Teknologi Indonesia. Saya berfokus pada pengembangan, implementasi, dan pemeliharaan sistem teknis yang kompleks untuk mendukung operasi bisnis klien.
+          </p>
+          <p class="text-steel leading-relaxed mb-8">
+            Dengan pengalaman lebih dari 5 tahun, saya telah terlibat dalam berbagai proyek mulai dari infrastruktur jaringan, sistem monitoring, hingga otomasi proses teknis di berbagai sektor industri.
+          </p>
+
+          <!-- Info list -->
+          <div class="space-y-3 mb-8">
+            <div class="flex gap-4">
+              <span class="text-xs text-steel uppercase tracking-wider w-24 pt-0.5 flex-shrink-0">Posisi</span>
+              <span class="text-ink text-sm font-medium">Technical Engineer</span>
+            </div>
+            <div class="flex gap-4">
+              <span class="text-xs text-steel uppercase tracking-wider w-24 pt-0.5 flex-shrink-0">Perusahaan</span>
+              <span class="text-ink text-sm font-medium">PT Maximus Teknologi Indonesia</span>
+            </div>
+            <div class="flex gap-4">
+              <span class="text-xs text-steel uppercase tracking-wider w-24 pt-0.5 flex-shrink-0">Lokasi</span>
+              <span class="text-ink text-sm font-medium">Jakarta, Indonesia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="mb-16">
+        <h3 class="font-semibold text-ink text-lg mb-8">Technical Skills</h3>
+        <div class="grid sm:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Network Infrastructure</span><span class="text-xs text-steel">90%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
             </div>
             <div>
-                <button onclick="handleLogout()" class="px-7 py-1.5 bg-[#2da5da] hover:bg-[#218dbb] text-white font-normal text-sm tracking-wide rounded-[2px] transition">
-                    Logout
-                </button>
+              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">System Administration</span><span class="text-xs text-steel">85%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
             </div>
-        </header>
+            <div>
+              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Troubleshooting & Maintenance</span><span class="text-xs text-steel">92%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+            </div>
+          </div>
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Cloud Services (AWS/GCP)</span><span class="text-xs text-steel">75%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">IT Security & Compliance</span><span class="text-xs text-steel">80%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Automation & Scripting</span><span class="text-xs text-steel">78%</span></div>
+              <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <main class="space-y-16">
-            
-            <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                <div class="lg:col-span-6 space-y-6">
-                    <div class="space-y-1">
-                        <h2 class="text-[36px] font-bold text-black leading-tight">Halo,</h2>
-                        <h1 class="text-[36px] font-bold text-black leading-tight">
-                            Saya <span class="text-[#2da5da]">Ahmad Yusuf</span>
-                        </h1>
-                    </div>
-                    <p class="text-[15px] text-[#333333] leading-relaxed text-justify">
-                        Saat ini saya aktif bekerja sebagai Technical Engineer di PT Maximus Teknologi Indonesia. Fokus utama saya adalah memastikan integrasi teknologi berjalan dengan optimal, aman, dan efisien demi mendukung skalabilitas bisnis Anda.
-                    </p>
-                    
-                    <div class="pt-4">
-                        <h3 class="text-[28px] font-bold text-black tracking-wide">Solusi :</h3>
-                    </div>
-                </div>
-                
-            </section>
-
-            <section class="grid grid-cols-1 md:grid-cols-3 gap-0 border border-collapse border-black/10">
-                
-                <div class="bg-[#7bc855] text-black p-8 flex flex-col justify-between min-h-[320px] border-b md:border-b-0 md:border-r border-black/10">
-                    <div class="text-[44px] leading-none mb-6">
-                        <i class="bi bi-hr"></i>
-                    </div>
-                    <div class="space-y-3">
-                        <h4 class="font-bold text-lg leading-tight">Infrastruktur IT & Maintenance</h4>
-                        <p class="text-sm opacity-90 leading-relaxed text-justify">
-                            Penyediaan, konfigurasi, dan maintenance server fisik maupun cloud yang andal untuk kebutuhan bisnis Anda.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-[#138343] text-white p-8 flex flex-col justify-between min-h-[320px] border-b md:border-b-0 md:border-r border-black/10">
-                    <div class="text-[40px] leading-none mb-6">
-                        <i class="bi bi-camera-video"></i>
-                    </div>
-                    <div class="space-y-3">
-                        <h4 class="font-bold text-lg leading-tight">Sistem CCTV</h4>
-                        <p class="text-sm opacity-90 leading-relaxed text-justify">
-                            Instalasi sistem pengawasan CCTV modern dengan pemantauan terpusat untuk keamanan tingkat tinggi.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-[#2452a0] text-white flex flex-col min-h-[320px]">
-                    <div class="p-8 flex-1 flex flex-col justify-start">
-                        <div class="text-[40px] leading-none mb-6">
-                            <i class="bi bi-person-check"></i>
-                        </div>
-                        <h4 class="font-bold text-lg leading-tight mb-3">Aplikasi Absensi</h4>
-                    </div>
-                    <div class="bg-[#0b2447] p-8 pt-4">
-                        <p class="text-sm opacity-90 leading-relaxed text-justify">
-                            Sistem absensi berbasis Face Recognition (Pengenalan Wajah) yang akurat dan minim kecurangan.
-                        </p>
-                    </div>
-                </div>
-
-            </section>
-
-            <section class="bg-[#e3effd] -mx-6 md:-mx-12 p-8 md:px-12 flex flex-col space-y-4">
-                <h3 class="text-[24px] font-bold text-black">
-                    Contact <span class="text-[#2da5da]">Me,</span>
-                </h3>
-                
-                <div class="flex flex-col space-y-2 text-base text-black font-normal">
-                    <a href="mailto:ahmad@maximus-teknologi.co.id" class="flex items-center gap-3 hover:text-[#2da5da] transition w-fit">
-                        <i class="bi bi-envelope-at text-xl"></i>
-                        <span>ahmad@maximus-teknologi.co.id</span>
-                    </a>
-                    <a href="https://www.instagram.com/ahmdysf_8?igsh=d2UyM3AxNzJvaDZ4" target="_blank" class="flex items-center gap-3 hover:text-[#2da5da] transition w-fit">
-                        <i class="bi bi-instagram text-xl"></i>
-                        <span>ahmdysf_8</span>
-                    </a>
-                </div>
-            </section>
-
-        </main>
+      <!-- Experience Timeline -->
+      <div>
+        <h3 class="font-semibold text-ink text-lg mb-8">Pengalaman Kerja</h3>
+        <div class="space-y-0">
+          <div class="flex gap-6">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line flex-1 mt-1" style="min-height:60px;"></div>
+            </div>
+            <div class="pb-10">
+              <p class="font-semibold text-ink text-sm mb-1">Technical Engineer</p>
+              <p class="text-sky text-xs font-semibold mb-1">PT Maximus Teknologi Indonesia</p>
+              <p class="text-steel text-xs mb-3">2021 — Sekarang</p>
+              <p class="text-steel text-sm leading-relaxed">Bertanggung jawab atas implementasi, monitoring, dan pemeliharaan infrastruktur teknologi klien di berbagai sektor industri.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line flex-1 mt-1" style="min-height:60px;"></div>
+            </div>
+            <div class="pb-10">
+              <p class="font-semibold text-ink text-sm mb-1">IT Support Specialist</p>
+              <p class="text-sky text-xs font-semibold mb-1">PT Solusi Digital Nusantara</p>
+              <p class="text-steel text-xs mb-3">2019 — 2021</p>
+              <p class="text-steel text-sm leading-relaxed">Menangani dukungan teknis tingkat 2 dan 3, termasuk konfigurasi jaringan, server management, dan troubleshooting sistem.</p>
+            </div>
+          </div>
+          <div class="flex gap-6">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot"></div>
+            </div>
+            <div>
+              <p class="font-semibold text-ink text-sm mb-1">Junior Network Engineer</p>
+              <p class="text-sky text-xs font-semibold mb-1">CV Mitra Teknindo</p>
+              <p class="text-steel text-xs mb-3">2018 — 2019</p>
+              <p class="text-steel text-sm leading-relaxed">Membantu perancangan dan instalasi jaringan LAN/WAN untuk klien korporat di wilayah Jabodetabek.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- PROJECTS SECTION -->
+    <div id="section-projects" class="section">
+      <div class="mb-12">
+        <p class="text-xs text-sky font-semibold uppercase tracking-widest mb-3">Portofolio</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-ink mb-4">Projects</h2>
+        <p class="text-steel max-w-lg">Beberapa project teknis yang telah saya kerjakan bersama tim di berbagai klien.</p>
+      </div>
 
-    <script>
-        function toggleAuth(formType) {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            
-            if (formType === 'login') {
-                registerForm.classList.add('hidden');
-                loginForm.classList.remove('hidden');
-            } else {
-                loginForm.classList.add('hidden');
-                registerForm.classList.remove('hidden');
-            }
-        }
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        function handleRegister(event) {
-            event.preventDefault();
-            const user = document.getElementById('reg-username').value.trim();
-            const pass = document.getElementById('reg-password').value;
+        <div class="project-card">
+          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #C8DCEC, #EFF4F8);">🌐</div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Networking</span><span class="tag">VLAN</span></div>
+            <h3 class="font-semibold text-ink text-base mb-2">Enterprise Network Redesign</h3>
+            <p class="text-steel text-sm leading-relaxed">Restrukturisasi jaringan perusahaan manufaktur dengan kapasitas 500+ pengguna menggunakan segmentasi VLAN dan firewall terpusat.</p>
+          </div>
+        </div>
 
-            if(user && pass) {
-                sessionStorage.setItem('portfolioUser', user);
-                sessionStorage.setItem('portfolioPass', pass);
-                
-                alert('Pendaftaran berhasil! Silahkan login dengan akun Anda.');
-                toggleAuth('login');
-                
-                document.getElementById('reg-username').value = '';
-                document.getElementById('reg-password').value = '';
-            }
-        }
+        <div class="project-card">
+          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #D4EAF5, #EFF4F8);">☁️</div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Cloud</span><span class="tag">AWS</span></div>
+            <h3 class="font-semibold text-ink text-base mb-2">Cloud Migration — Retail Client</h3>
+            <p class="text-steel text-sm leading-relaxed">Migrasi infrastruktur on-premise ke AWS EC2 & RDS untuk perusahaan retail dengan downtime kurang dari 2 jam.</p>
+          </div>
+        </div>
 
-        function handleLogin(event) {
-            event.preventDefault();
-            const userIn = document.getElementById('login-username').value.trim();
-            const passIn = document.getElementById('login-password').value;
+        <div class="project-card">
+          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #E8F4FB, #EFF4F8);">📡</div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Monitoring</span><span class="tag">Zabbix</span></div>
+            <h3 class="font-semibold text-ink text-base mb-2">NOC Monitoring System</h3>
+            <p class="text-steel text-sm leading-relaxed">Implementasi sistem monitoring terpusat menggunakan Zabbix untuk memantau 200+ device secara real-time dengan notifikasi otomatis.</p>
+          </div>
+        </div>
 
-            const savedUser = sessionStorage.getItem('portfolioUser');
-            const savedPass = sessionStorage.getItem('portfolioPass');
+        <div class="project-card">
+          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #C8DCEC, #D4EAF5);">🔒</div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Security</span><span class="tag">VPN</span></div>
+            <h3 class="font-semibold text-ink text-base mb-2">Secure Remote Access VPN</h3>
+            <p class="text-steel text-sm leading-relaxed">Konfigurasi SSL VPN dengan autentikasi 2FA untuk mendukung 300+ karyawan remote kerja pasca pandemi.</p>
+          </div>
+        </div>
 
-            if (userIn === savedUser && passIn === savedPass && savedUser !== null) {
-                showPortfolio();
-            } else {
-                alert('Username atau Password salah/belum terdaftar. Silahkan klik Daftar Sekarang di bawah jika belum punya akun.');
-            }
-        }
+        <div class="project-card">
+          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #EFF4F8, #C8DCEC);">⚡</div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Automation</span><span class="tag">Python</span></div>
+            <h3 class="font-semibold text-ink text-base mb-2">Network Automation Scripts</h3>
+            <p class="text-steel text-sm leading-relaxed">Pengembangan skrip Python untuk otomasi backup konfigurasi router/switch dan audit keamanan jaringan secara terjadwal.</p>
+          </div>
+        </div>
 
-        function showPortfolio() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.add('hidden');
-            
-            const portfolio = document.getElementById('portfolioPage');
-            portfolio.classList.remove('hidden');
-            
-            const body = document.body;
-            body.classList.remove('items-center', 'justify-center');
-            body.classList.add('items-start', 'justify-center');
-        }
+        <div class="project-card">
+          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #D4EAF5, #C8DCEC);">🖥️</div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Server</span><span class="tag">Linux</span></div>
+            <h3 class="font-semibold text-ink text-base mb-2">Linux Server Hardening</h3>
+            <p class="text-steel text-sm leading-relaxed">Penguatan keamanan 50+ server Linux klien perbankan sesuai standar CIS Benchmark dan regulasi OJK.</p>
+          </div>
+        </div>
 
-        function handleLogout() {
-            const portfolio = document.getElementById('portfolioPage');
-            portfolio.classList.add('hidden');
-            
-            const body = document.body;
-            body.classList.add('items-center', 'justify-center');
-            body.classList.remove('items-start', 'justify-center');
-            
-            toggleAuth('login');
-            document.getElementById('login-username').value = '';
-            document.getElementById('login-password').value = '';
-        }
-    </script>
+      </div>
+    </div>
+
+    <!-- CONTACT SECTION -->
+    <div id="section-contact" class="section">
+      <div class="mb-12">
+        <p class="text-xs text-sky font-semibold uppercase tracking-widest mb-3">Kontak</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-ink mb-4">Let's Talk</h2>
+        <p class="text-steel max-w-md">Ada project atau kolaborasi menarik? Saya terbuka untuk diskusi.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <!-- Contact Info -->
+        <div>
+          <div class="space-y-8 mb-12">
+            <div class="flex items-start gap-5">
+              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background:#EFF4F8; border-radius:2px;">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4BAFD6" stroke-width="1.8"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <p class="text-xs text-steel uppercase tracking-wider mb-1">Email</p>
+                <p class="text-ink font-medium text-sm">ahmad.yusuf@maximusteknologi.co.id</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-5">
+              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background:#EFF4F8; border-radius:2px;">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4BAFD6" stroke-width="1.8"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <p class="text-xs text-steel uppercase tracking-wider mb-1">Lokasi</p>
+                <p class="text-ink font-medium text-sm">Jakarta, Indonesia</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-5">
+              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background:#EFF4F8; border-radius:2px;">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4BAFD6" stroke-width="1.8"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <p class="text-xs text-steel uppercase tracking-wider mb-1">Perusahaan</p>
+                <p class="text-ink font-medium text-sm">PT Maximus Teknologi Indonesia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="space-y-4">
+          <input type="text" class="contact-input" placeholder="Nama Anda" />
+          <input type="email" class="contact-input" placeholder="Email Anda" />
+          <input type="text" class="contact-input" placeholder="Subjek" />
+          <textarea class="contact-input resize-none" rows="5" placeholder="Pesan Anda..."></textarea>
+          <div>
+            <button class="send-btn" onclick="sendContact()">Kirim Pesan →</button>
+          </div>
+          <div id="contact-success" class="hidden text-sm text-green-600 font-medium pt-1">✓ Pesan berhasil dikirim! Saya akan segera menghubungi Anda.</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-100 bg-white">
+    <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="text-xs text-steel">© 2025 Ahmad Yusuf. All rights reserved.</p>
+      <p class="text-xs text-steel"></p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // ---- STORAGE (localStorage, no database) ----
+  function getAccounts() {
+    try { return JSON.parse(localStorage.getItem('ay_accounts') || '{}'); } catch(e) { return {}; }
+  }
+  function saveAccounts(accounts) {
+    localStorage.setItem('ay_accounts', JSON.stringify(accounts));
+  }
+
+  // ---- SWITCH FORMS ----
+  function switchToLogin() {
+    document.getElementById('register-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
+    clearErrors();
+  }
+  function switchToRegister() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+    clearErrors();
+  }
+  function clearErrors() {
+    ['reg-error','login-error'].forEach(id => {
+      const el = document.getElementById(id);
+      el.style.display = 'none'; el.textContent = '';
+    });
+  }
+  function showError(id, msg) {
+    const el = document.getElementById(id);
+    el.textContent = msg; el.style.display = 'block';
+  }
+
+  // ---- REGISTER ----
+  function handleRegister() {
+    const name  = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const pass  = document.getElementById('reg-pass').value;
+    const pass2 = document.getElementById('reg-pass2').value;
+
+    if (!name || !email || !pass || !pass2) return showError('reg-error', 'Semua field wajib diisi.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('reg-error', 'Format email tidak valid.');
+    if (pass.length < 6) return showError('reg-error', 'Password minimal 6 karakter.');
+    if (pass !== pass2) return showError('reg-error', 'Konfirmasi password tidak cocok.');
+
+    const accounts = getAccounts();
+    if (accounts[email]) return showError('reg-error', 'Email sudah terdaftar. Silakan login.');
+
+    accounts[email] = { name, password: pass };
+    saveAccounts(accounts);
+
+    // auto-fill login & switch
+    document.getElementById('login-email').value = email;
+    document.getElementById('login-pass').value = '';
+    switchToLogin();
+
+    // show success toast
+    showToast('Akun berhasil dibuat! Silakan login.');
+  }
+
+  // ---- LOGIN ----
+  function handleLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const pass  = document.getElementById('login-pass').value;
+
+    if (!email || !pass) return showError('login-error', 'Email dan password wajib diisi.');
+
+    const accounts = getAccounts();
+    if (!accounts[email]) return showError('login-error', 'Email belum terdaftar. Silakan daftar.');
+    if (accounts[email].password !== pass) return showError('login-error', 'Password salah. Coba lagi.');
+
+    document.getElementById('login-page').style.display = 'none';
+    const pp = document.getElementById('portfolio-page');
+    pp.style.display = 'block';
+    pp.style.opacity = '0';
+    setTimeout(() => { pp.style.transition = 'opacity 0.5s'; pp.style.opacity = '1'; }, 50);
+    animateSkills();
+  }
+
+  // ---- TOAST ----
+  function showToast(msg) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1A1A2E;color:white;padding:12px 24px;border-radius:4px;font-size:13px;z-index:9999;font-family:DM Sans,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);';
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+  }
+
+  // Enter key
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Enter') return;
+    if (document.getElementById('login-page').style.display === 'none') return;
+    if (document.getElementById('login-form').style.display !== 'none') handleLogin();
+    else handleRegister();
+  });
+
+  // Check if any account exists — show login directly if yes
+  window.addEventListener('DOMContentLoaded', function() {
+    const accounts = getAccounts();
+    if (Object.keys(accounts).length > 0) switchToLogin();
+  });
+
+  function logout() {
+    document.getElementById('portfolio-page').style.display = 'none';
+    const lp = document.getElementById('login-page');
+    lp.style.display = 'flex';
+    // clear fields
+    ['reg-name','reg-email','reg-pass','reg-pass2','login-email','login-pass'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.value = '';
+    });
+    clearErrors();
+    // show login if account exists, otherwise register
+    const accounts = getAccounts();
+    if (Object.keys(accounts).length > 0) switchToLogin();
+    else switchToRegister();
+  }
+
+  // ---- NAVIGATION ----
+  function showSection(name, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    const sec = document.getElementById('section-' + name);
+    if (sec) { sec.classList.add('active'); sec.style.animation = 'fadeUp 0.5s ease'; }
+    if (el) el.classList.add('active');
+    if (name === 'about') setTimeout(animateSkills, 300);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleMobileMenu() {
+    const m = document.getElementById('mobile-menu');
+    m.classList.toggle('hidden');
+  }
+
+  // ---- SKILL BARS ----
+  function animateSkills() {
+    document.querySelectorAll('.skill-fill').forEach(bar => {
+      const w = bar.getAttribute('data-width');
+      setTimeout(() => { bar.style.width = w + '%'; }, 100);
+    });
+  }
+
+  // ---- CONTACT ----
+  function sendContact() {
+    document.getElementById('contact-success').classList.remove('hidden');
+    setTimeout(() => document.getElementById('contact-success').classList.add('hidden'), 4000);
+  }
+</script>
 </body>
 </html>
