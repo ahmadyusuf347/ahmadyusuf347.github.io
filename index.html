@@ -1,640 +1,431 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahmad Yusuf — Portfolio</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['DM Sans', 'sans-serif'],
-            serif: ['DM Serif Display', 'serif'],
-          },
-          colors: {
-            sky: { DEFAULT: '#4BAFD6', light: '#7DCBEA', dark: '#2D8FB5' },
-            ink: '#1A1A2E',
-            mist: '#EFF4F8',
-            steel: '#8A9BB0',
-          },
-          animation: {
-            'fade-up': 'fadeUp 0.7s ease forwards',
-            'fade-in': 'fadeIn 0.5s ease forwards',
-            'slide-in': 'slideIn 0.6s ease forwards',
-          },
-          keyframes: {
-            fadeUp: { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
-            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-            slideIn: { '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': { opacity: '1', transform: 'translateX(0)' } },
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    * { box-sizing: border-box; }
-    body { font-family: 'DM Sans', sans-serif; background: #EFF4F8; }
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Ahmad Yusuf</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    /* Login Page */
-    #login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #C8DCEC; position: relative; overflow: hidden; }
-    #login-page::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, #9ACDE4 0%, transparent 70%); top: -100px; left: -100px; pointer-events: none; }
-    #login-page::after { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, #B8D8EE 0%, transparent 70%); bottom: -60px; right: -60px; pointer-events: none; }
+  <!-- Favicons -->
+  <link href="favicon.ico" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    .login-card { background: white; border-radius: 2px; overflow: hidden; box-shadow: 0 20px 60px rgba(30,60,90,0.12); animation: fadeUp 0.7s ease forwards; }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    .input-underline { border: none; border-bottom: 1.5px solid #CBD5E1; outline: none; width: 100%; padding: 10px 0; font-size: 15px; color: #1A1A2E; background: transparent; transition: border-color 0.3s; font-family: 'DM Sans', sans-serif; }
-    .input-underline::placeholder { color: #94A3B8; font-weight: 400; }
-    .input-underline:focus { border-bottom-color: #4BAFD6; }
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    .login-btn { background: #4BAFD6; color: white; border: none; width: 100%; padding: 14px; font-size: 16px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.25s, transform 0.15s; letter-spacing: 0.02em; border-radius: 1px; }
-    .login-btn:hover { background: #2D8FB5; transform: translateY(-1px); }
-    .login-btn:active { transform: translateY(0); }
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
 
-    /* Portfolio Page */
-    #portfolio-page { display: none; }
-    .nav-link { position: relative; font-size: 14px; color: #8A9BB0; font-weight: 500; transition: color 0.2s; text-decoration: none; }
-    .nav-link:hover, .nav-link.active { color: #1A1A2E; }
-    .nav-link.active::after { content: ''; display: block; width: 100%; height: 2px; background: #4BAFD6; border-radius: 2px; margin-top: 2px; }
-
-    .section { display: none; }
-    .section.active { display: block; }
-
-    .skill-bar { height: 4px; background: #E2EAF2; border-radius: 4px; overflow: hidden; }
-    .skill-fill { height: 100%; background: linear-gradient(90deg, #4BAFD6, #7DCBEA); border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
-
-    .project-card { background: white; border-radius: 2px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; cursor: pointer; border: 1px solid #E8EFF5; }
-    .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(30,60,90,0.10); }
-
-    .tag { background: #EFF4F8; color: #4BAFD6; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; display: inline-block; letter-spacing: 0.04em; text-transform: uppercase; }
-
-    .contact-input { width: 100%; border: 1.5px solid #E2EAF2; border-radius: 2px; padding: 12px 16px; font-size: 14px; font-family: 'DM Sans', sans-serif; color: #1A1A2E; transition: border-color 0.25s; outline: none; background: white; }
-    .contact-input:focus { border-color: #4BAFD6; }
-
-    .send-btn { background: #1A1A2E; color: white; border: none; padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.25s, transform 0.15s; letter-spacing: 0.04em; }
-    .send-btn:hover { background: #4BAFD6; transform: translateY(-1px); }
-
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid #E2EAF2; border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 600; color: #4BAFD6; letter-spacing: 0.06em; text-transform: uppercase; }
-    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4BAFD6; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    .timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: #4BAFD6; border: 2px solid white; box-shadow: 0 0 0 3px #C8DCEC; flex-shrink: 0; margin-top: 4px; }
-    .timeline-line { width: 1px; background: #D6E4EE; margin: 4px auto; }
-
-    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: #C8DCEC; border-radius: 4px; }
-
-    @media (max-width: 640px) {
-      .login-card { width: calc(100vw - 32px); margin: 0 16px; }
-    }
-    .error-msg { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; }
-  </style>
+  <!-- =======================================================
+  * Template Name: MyResume
+  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
+  * Updated: Jun 29 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
-<body>
 
-<!-- ===================== LOGIN PAGE ===================== -->
-<div id="login-page">
-  <div class="login-card w-full max-w-sm mx-4" style="width:380px;">
+<body class="index-page">
 
-    <!-- ===== REGISTER FORM ===== -->
-    <div id="register-form">
-      <div class="p-10 pb-8">
-        <div class="mb-10">
-          <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-1">Hello,</h1>
-          <h1 class="text-4xl font-bold leading-tight" style="color:#4BAFD6;">Friend!</h1>
-          <p class="text-xs mt-3" style="color:#94A3B8;">Buat akun untuk mengakses portfolio</p>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <input type="text" id="reg-name" class="input-underline" placeholder="Name" autocomplete="off" />
-          </div>
-          <div>
-            <input type="email" id="reg-email" class="input-underline" placeholder="Email" autocomplete="off" />
-          </div>
-          <div>
-            <input type="password" id="reg-pass" class="input-underline" placeholder="Create Password" />
-          </div>
-          <div>
-            <input type="password" id="reg-pass2" class="input-underline" placeholder="Confirm Password" />
-          </div>
-          <div class="error-msg" id="reg-error"></div>
-          <div class="pt-1">
-            <button class="login-btn" onclick="handleRegister()">Daftar Sekarang</button>
-          </div>
-        </div>
-      </div>
-      <div class="px-10 py-5" style="background:#F5F0EB;">
-        <p class="text-sm text-center" style="color:#888;">
-          Sudah punya akun? <a href="#" class="font-semibold" style="color:#4BAFD6;" onclick="event.preventDefault(); switchToLogin()">Login di sini</a>
-        </p>
-      </div>
-    </div>
+  <header id="header" class="header d-flex flex-column justify-content-center">
 
-    <!-- ===== LOGIN FORM ===== -->
-    <div id="login-form" style="display:none;">
-      <div class="p-10 pb-8">
-        <div class="mb-10">
-          <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-1">Welcome</h1>
-          <h1 class="text-4xl font-bold leading-tight" style="color:#4BAFD6;">Back!</h1>
-          <p class="text-xs mt-3" style="color:#94A3B8;">Masuk dengan akun yang sudah terdaftar</p>
-        </div>
-        <div class="space-y-6">
-          <div>
-            <input type="email" id="login-email" class="input-underline" placeholder="Email" autocomplete="off" />
-          </div>
-          <div>
-            <input type="password" id="login-pass" class="input-underline" placeholder="Password" />
-          </div>
-          <div class="error-msg" id="login-error"></div>
-          <div class="pt-1">
-            <button class="login-btn" onclick="handleLogin()">Login</button>
-          </div>
-        </div>
-      </div>
-      <div class="px-10 py-5" style="background:#F5F0EB;">
-        <p class="text-sm text-center" style="color:#888;">
-          Belum punya akun? <a href="#" class="font-semibold" style="color:#4BAFD6;" onclick="event.preventDefault(); switchToRegister()">Daftar Sekarang</a>
-        </p>
-      </div>
-    </div>
+    <i class="header-toggle d-xl-none bi bi-list"></i>
 
-  </div>
-</div>
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i><span>Home</span></a></li>
+        <li><a href="#about"><i class="bi bi-person navicon"></i><span>About</span></a></li>
+        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i><span>Resume</span></a></li>
+        <li><a href="#contact"><i class="bi bi-envelope navicon"></i><span>Contact</span></a></li>
+      </ul>
+    </nav>
 
-<!-- ===================== PORTFOLIO PAGE ===================== -->
-<div id="portfolio-page">
+  </header>
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
-    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold" style="background:#053649;">AY</div>
-        <span class="font-semibold text-sm text-gray-900">Ahmad Yusuf</span>
-      </div>
-      <div class="hidden sm:flex items-center gap-8">
-        <a class="nav-link active" onclick="showSection('home', this)">Home</a>
-        <a class="nav-link" onclick="showSection('about', this)">About</a>
-        <a class="nav-link" onclick="showSection('projects', this)">Projects</a>
-        <a class="nav-link" onclick="showSection('contact', this)">Contact</a>
-      </div>
-      <div class="flex items-center gap-4">
-        <!-- Mobile menu -->
-        <button class="sm:hidden text-gray-500" onclick="toggleMobileMenu()">
-          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-        <button onclick="logout()" class="text-xs font-medium text-steel hover:text-red-400 transition-colors hidden sm:block">Logout</button>
-      </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden sm:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-4">
-      <a class="block nav-link" onclick="showSection('home', this); toggleMobileMenu()">Home</a>
-      <a class="block nav-link" onclick="showSection('about', this); toggleMobileMenu()">About</a>
-      <a class="block nav-link" onclick="showSection('projects', this); toggleMobileMenu()">Projects</a>
-      <a class="block nav-link" onclick="showSection('contact', this); toggleMobileMenu()">Contact</a>
-      <a class="block text-xs font-medium text-red-400" onclick="logout()">Logout</a>
-    </div>
-  </nav>
+  <main class="main">
 
-  <main class="max-w-5xl mx-auto px-6 pt-28 pb-20">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section light-background">
 
-    <!-- HOME SECTION -->
-    <div id="section-home" class="section active">
-      <div class="min-h-[70vh] flex flex-col justify-center">
-        <div class="animate-fade-up">
-          <div class="hero-badge mb-8">Available for Projects</div>
-          <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl text-ink leading-tight mb-6">
-            Ahmad<br /><span style="color:#4BAFD6;">Yusuf.</span>
-          </h1>
-          <p class="text-steel text-lg sm:text-xl font-light max-w-lg leading-relaxed mb-10">
-            Technical Engineer di <span class="text-ink font-medium">PT Maximus Teknologi Indonesia</span> — membangun solusi teknis yang andal, efisien, dan inovatif.
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <button onclick="showSection('projects', document.querySelector('[onclick*=projects]'))" class="px-8 py-3 text-white text-sm font-semibold transition-all hover:-translate-y-0.5" style="background:#4BAFD6; border-radius:2px;">Lihat Projects</button>
-            <button onclick="showSection('contact', document.querySelector('[onclick*=contact]'))" class="px-8 py-3 text-ink text-sm font-semibold border border-gray-200 transition-all hover:border-sky hover:-translate-y-0.5 bg-white" style="border-radius:2px;">Hubungi Saya</button>
-          </div>
-        </div>
+      <img src="assets/img/hero-bg.jpg" alt="">
 
-        <!-- Stats -->
-        <div class="grid grid-cols-3 gap-6 mt-20 pt-12 border-t border-gray-100">
-          <div>
-            <p class="text-3xl font-serif text-ink mb-1">5+</p>
-            <p class="text-xs text-steel font-medium uppercase tracking-wider">Tahun Pengalaman</p>
-          </div>
-          <div>
-            <p class="text-3xl font-serif text-ink mb-1">30+</p>
-            <p class="text-xs text-steel font-medium uppercase tracking-wider">Project Selesai</p>
-          </div>
-          <div>
-            <p class="text-3xl font-serif text-ink mb-1">15+</p>
-            <p class="text-xs text-steel font-medium uppercase tracking-wider">Klien Puas</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABOUT SECTION -->
-    <div id="section-about" class="section">
-      <div class="mb-12">
-        <p class="text-xs text-sky font-semibold uppercase tracking-widest mb-3">Tentang Saya</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-ink mb-6">Latar Belakang</h2>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-16">
-        <div>
-          <!-- Avatar placeholder -->
-          <div class="w-full aspect-square max-w-xs rounded-2px overflow-hidden mb-8 relative" style="border-radius:2px; background: linear-gradient(135deg, #C8DCEC 0%, #EFF4F8 100%);">
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-              <div class="w-24 h-24 rounded-full mb-4 flex items-center justify-center text-4xl font-serif text-white" style="background:#4BAFD6;">AY</div>
-              <p class="text-ink font-semibold text-lg">Ahmad Yusuf</p>
-              <p class="text-steel text-sm">Technical Engineer</p>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <p class="text-steel leading-relaxed mb-6">
-            Seorang <span class="text-ink font-medium">Technical Engineer</span> berpengalaman di PT Maximus Teknologi Indonesia. Saya berfokus pada pengembangan, implementasi, dan pemeliharaan sistem teknis yang kompleks untuk mendukung operasi bisnis klien.
-          </p>
-          <p class="text-steel leading-relaxed mb-8">
-            Dengan pengalaman lebih dari 5 tahun, saya telah terlibat dalam berbagai proyek mulai dari infrastruktur jaringan, sistem monitoring, hingga otomasi proses teknis di berbagai sektor industri.
-          </p>
-
-          <!-- Info list -->
-          <div class="space-y-3 mb-8">
-            <div class="flex gap-4">
-              <span class="text-xs text-steel uppercase tracking-wider w-24 pt-0.5 flex-shrink-0">Posisi</span>
-              <span class="text-ink text-sm font-medium">Technical Engineer</span>
-            </div>
-            <div class="flex gap-4">
-              <span class="text-xs text-steel uppercase tracking-wider w-24 pt-0.5 flex-shrink-0">Perusahaan</span>
-              <span class="text-ink text-sm font-medium">PT Maximus Teknologi Indonesia</span>
-            </div>
-            <div class="flex gap-4">
-              <span class="text-xs text-steel uppercase tracking-wider w-24 pt-0.5 flex-shrink-0">Lokasi</span>
-              <span class="text-ink text-sm font-medium">Jakarta, Indonesia</span>
+      <div class="container" data-aos="zoom-out">
+        <div class="row justify-content-center">
+          <div class="col-lg-9">
+            <h2>Ahmad Yusuf</h2>
+            <p>I'm <span class="typed" data-typed-items="Sales Support, Technical Engineer">Sales Support</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+            <strong>PT. Maximus Teknologi Indonesia</strong>
+            <div class="social-links">
+              <a href="https://github.com/ahmadyusuf347"><i class="bi bi-github"></i></a>
+              <a href="https://www.instagram.com/ahmdysf_8?igsh=d2UyM3AxNzJvaDZ4"><i class="bi bi-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/ahmad-yusuf-6816711ab/"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Skills -->
-      <div class="mb-16">
-        <h3 class="font-semibold text-ink text-lg mb-8">Technical Skills</h3>
-        <div class="grid sm:grid-cols-2 gap-8">
-          <div class="space-y-6">
-            <div>
-              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Network Infrastructure</span><span class="text-xs text-steel">90%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">System Administration</span><span class="text-xs text-steel">85%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Troubleshooting & Maintenance</span><span class="text-xs text-steel">92%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
-            </div>
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About</h2>
+        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
+            <img src="assets/img/profile-img.jpg" class="img-fluid" alt="">
           </div>
-          <div class="space-y-6">
-            <div>
-              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Cloud Services (AWS/GCP)</span><span class="text-xs text-steel">75%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">IT Security & Compliance</span><span class="text-xs text-steel">80%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-2"><span class="text-sm font-medium text-ink">Automation & Scripting</span><span class="text-xs text-steel">78%</span></div>
-              <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Experience Timeline -->
-      <div>
-        <h3 class="font-semibold text-ink text-lg mb-8">Pengalaman Kerja</h3>
-        <div class="space-y-0">
-          <div class="flex gap-6">
-            <div class="flex flex-col items-center">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line flex-1 mt-1" style="min-height:60px;"></div>
-            </div>
-            <div class="pb-10">
-              <p class="font-semibold text-ink text-sm mb-1">Technical Engineer</p>
-              <p class="text-sky text-xs font-semibold mb-1">PT Maximus Teknologi Indonesia</p>
-              <p class="text-steel text-xs mb-3">2021 — Sekarang</p>
-              <p class="text-steel text-sm leading-relaxed">Bertanggung jawab atas implementasi, monitoring, dan pemeliharaan infrastruktur teknologi klien di berbagai sektor industri.</p>
-            </div>
-          </div>
-          <div class="flex gap-6">
-            <div class="flex flex-col items-center">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line flex-1 mt-1" style="min-height:60px;"></div>
-            </div>
-            <div class="pb-10">
-              <p class="font-semibold text-ink text-sm mb-1">IT Support Specialist</p>
-              <p class="text-sky text-xs font-semibold mb-1">PT Solusi Digital Nusantara</p>
-              <p class="text-steel text-xs mb-3">2019 — 2021</p>
-              <p class="text-steel text-sm leading-relaxed">Menangani dukungan teknis tingkat 2 dan 3, termasuk konfigurasi jaringan, server management, dan troubleshooting sistem.</p>
-            </div>
-          </div>
-          <div class="flex gap-6">
-            <div class="flex flex-col items-center">
-              <div class="timeline-dot"></div>
-            </div>
-            <div>
-              <p class="font-semibold text-ink text-sm mb-1">Junior Network Engineer</p>
-              <p class="text-sky text-xs font-semibold mb-1">CV Mitra Teknindo</p>
-              <p class="text-steel text-xs mb-3">2018 — 2019</p>
-              <p class="text-steel text-sm leading-relaxed">Membantu perancangan dan instalasi jaringan LAN/WAN untuk klien korporat di wilayah Jabodetabek.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECTS SECTION -->
-    <div id="section-projects" class="section">
-      <div class="mb-12">
-        <p class="text-xs text-sky font-semibold uppercase tracking-widest mb-3">Portofolio</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-ink mb-4">Projects</h2>
-        <p class="text-steel max-w-lg">Beberapa project teknis yang telah saya kerjakan bersama tim di berbagai klien.</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <div class="project-card">
-          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #C8DCEC, #EFF4F8);">🌐</div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Networking</span><span class="tag">VLAN</span></div>
-            <h3 class="font-semibold text-ink text-base mb-2">Enterprise Network Redesign</h3>
-            <p class="text-steel text-sm leading-relaxed">Restrukturisasi jaringan perusahaan manufaktur dengan kapasitas 500+ pengguna menggunakan segmentasi VLAN dan firewall terpusat.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #D4EAF5, #EFF4F8);">☁️</div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Cloud</span><span class="tag">AWS</span></div>
-            <h3 class="font-semibold text-ink text-base mb-2">Cloud Migration — Retail Client</h3>
-            <p class="text-steel text-sm leading-relaxed">Migrasi infrastruktur on-premise ke AWS EC2 & RDS untuk perusahaan retail dengan downtime kurang dari 2 jam.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #E8F4FB, #EFF4F8);">📡</div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Monitoring</span><span class="tag">Zabbix</span></div>
-            <h3 class="font-semibold text-ink text-base mb-2">NOC Monitoring System</h3>
-            <p class="text-steel text-sm leading-relaxed">Implementasi sistem monitoring terpusat menggunakan Zabbix untuk memantau 200+ device secara real-time dengan notifikasi otomatis.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #C8DCEC, #D4EAF5);">🔒</div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Security</span><span class="tag">VPN</span></div>
-            <h3 class="font-semibold text-ink text-base mb-2">Secure Remote Access VPN</h3>
-            <p class="text-steel text-sm leading-relaxed">Konfigurasi SSL VPN dengan autentikasi 2FA untuk mendukung 300+ karyawan remote kerja pasca pandemi.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #EFF4F8, #C8DCEC);">⚡</div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Automation</span><span class="tag">Python</span></div>
-            <h3 class="font-semibold text-ink text-base mb-2">Network Automation Scripts</h3>
-            <p class="text-steel text-sm leading-relaxed">Pengembangan skrip Python untuk otomasi backup konfigurasi router/switch dan audit keamanan jaringan secara terjadwal.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="h-40 flex items-center justify-center text-4xl" style="background: linear-gradient(135deg, #D4EAF5, #C8DCEC);">🖥️</div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3"><span class="tag">Server</span><span class="tag">Linux</span></div>
-            <h3 class="font-semibold text-ink text-base mb-2">Linux Server Hardening</h3>
-            <p class="text-steel text-sm leading-relaxed">Penguatan keamanan 50+ server Linux klien perbankan sesuai standar CIS Benchmark dan regulasi OJK.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- CONTACT SECTION -->
-    <div id="section-contact" class="section">
-      <div class="mb-12">
-        <p class="text-xs text-sky font-semibold uppercase tracking-widest mb-3">Kontak</p>
-        <h2 class="font-serif text-4xl sm:text-5xl text-ink mb-4">Let's Talk</h2>
-        <p class="text-steel max-w-md">Ada project atau kolaborasi menarik? Saya terbuka untuk diskusi.</p>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
-        <!-- Contact Info -->
-        <div>
-          <div class="space-y-8 mb-12">
-            <div class="flex items-start gap-5">
-              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background:#EFF4F8; border-radius:2px;">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4BAFD6" stroke-width="1.8"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <div class="col-lg-8 content">
+            <h2>Technical Engineer & Sales Support</h2>
+            <p class="fst-italic py-3">
+              I am currently studying to become a professional IT engineer and a Junior Sales Representative
+            </p>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>Gen Milenial</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>ahmadyusuf.org</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+62 8561507488</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Jakarta, Indonesia</span></li>
+                </ul>
               </div>
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>32</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>ahmad@maximus-teknologi.co.id</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="py-3">
+              Officiis eligendi itaque labore et dolorum mollitia officiis optio vero. Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore. Et eius omnis.
+              Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia repellendus itaque neque.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-emoji-smile"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Happy Clients</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-journal-richtext"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Projects</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-headset"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hours Of Support</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+            <i class="bi bi-people"></i>
+            <div class="stats-item">
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hard Workers</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Skills</h2>
+        <p>Dedicated Technical Engineer with strong problem-solving skills and a passion for delivering reliable, efficient, and innovative technology solutions. <br> Experienced in troubleshooting, system support, and ensuring optimal performance to meet business and client needs.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row skills-content skills-animation">
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill"><span>HTML</span> <i class="val">800%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>CSS</span> <i class="val">90%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>Network</span> <i class="val">75%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill"><span>Linux System Administrator</span> <i class="val">70%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div><!-- End Skills Item -->
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Skills Section -->
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Resume</h2>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">Sumary</h3>
+
+            <div class="resume-item pb-0">
+              <h4>Ahmad Yusuf</h4>
+              <p><em>Experienced Sales Support and Technical Support professional with strong expertise in customer service, technical troubleshooting, and sales operations. Skilled in assisting clients, coordinating with technical teams, and providing effective solutions to ensure customer satisfaction and business growth. Able to work under pressure, manage multiple tasks, and deliver high-quality support in fast-paced environments.</em></p>
+              <ul>
+                <li>SUkabumi, Jawa Barat, Indonesia</li>
+                <li>+62 8561507488</li>
+                <li>ahmad@maximus-teknologi.co.id</li>
+              </ul>
+            </div><!-- Edn Resume Item -->
+
+            <h3 class="resume-title">Education</h3>
+            <div class="resume-item">
+              <h4>SMK Teknik Komputer & Jaringan</h4>
+              <h5>2009 - 2012</h5>
+              <p><em>SMK Bela Nusantara Cianjur</em></p>
+              <p>Jl. Raya Cibeber Km. 6,5, Sirnagalih, Kecamatan Cilaku, Kabupaten Cianjur, Jawa Barat 43285</p>
+            </div><!-- Edn Resume Item -->
+
+            <div class="resume-item">
+              <h4>Sistem Informasi</h4>
+              <h5>2026 - Present</h5>
+              <p><em>Institu Citra Buana Indonesia, Kota Sukabumi, Jawa Barat, Indonesias</em></p>
+              <p>Jl. Raya Cemerlang, Sukakarya, Kec. Warudoyong, Kota Sukabumi, Jawa Barat.</p>
+            </div><!-- Edn Resume Item -->
+
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">Professional Experience</h3>
+            <div class="resume-item">
+              <h4>Technical Support & Sales Support  at PT Maximus Teknologi Indonesia</h4>
+              <h5>2024 - Present</h5>
+              <p><em>Jakarta Selatan, Indonesia </em></p>
+              <ul>
+                <li>Preparing and finalizing tender documents</li>
+                <li>Uploading tender documents </li>
+                <li>Attending meetings with clients regarding requirements and negotiations</li>
+                <li>Project implementation and client support in case of issues</li>
+              </ul>
+            </div><!-- Edn Resume Item -->
+
+            <div class="resume-item">
+              <h4>Incoming Quality Control at PT Toshiba Consumer Product Indonesia</h4>
+              <h5>2013 - 2015</h5>
+              <p><em>Cikarang Selatan, Jawa barat, Indonesia</em></p>
+              <ul>
+                <li>Sampling of LCD panels from suppliers prior to production.</li>
+                <li>Analyzing findings of non-conforming parts in production</li>
+                <li>Preparing reports on non-conforming parts</li>
+                <li>Attending production quality training</li>
+              </ul>
+            </div><!-- Edn Resume Item -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Resume Section -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+  
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Please feel free to contact me for project needs, partnerships, or technical consultations.
+           <br> Let’s work together to deliver professional, fast, and tailored solutions that meet your needs.</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
               <div>
-                <p class="text-xs text-steel uppercase tracking-wider mb-1">Email</p>
-                <p class="text-ink font-medium text-sm">ahmad.yusuf@maximusteknologi.co.id</p>
+                <h3>Address</h3>
+                <p>Jakarta, Indonesia</p>
               </div>
-            </div>
-            <div class="flex items-start gap-5">
-              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background:#EFF4F8; border-radius:2px;">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4BAFD6" stroke-width="1.8"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
-                <p class="text-xs text-steel uppercase tracking-wider mb-1">Lokasi</p>
-                <p class="text-ink font-medium text-sm">Jakarta, Indonesia</p>
+                <h3>Call Us</h3>
+                <p>+62 8561507488</p>
               </div>
-            </div>
-            <div class="flex items-start gap-5">
-              <div class="w-10 h-10 rounded flex items-center justify-center flex-shrink-0" style="background:#EFF4F8; border-radius:2px;">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4BAFD6" stroke-width="1.8"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
-                <p class="text-xs text-steel uppercase tracking-wider mb-1">Perusahaan</p>
-                <p class="text-ink font-medium text-sm">PT Maximus Teknologi Indonesia</p>
+                <h3>Email Us</h3>
+                <p>ahmad@maximus-teknologi.co.id</p>
               </div>
-            </div>
+            </div><!-- End Info Item -->
+
           </div>
+
+          <div class="col-lg-8">
+            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
         </div>
 
-        <!-- Contact Form -->
-        <div class="space-y-4">
-          <input type="text" class="contact-input" placeholder="Nama Anda" />
-          <input type="email" class="contact-input" placeholder="Email Anda" />
-          <input type="text" class="contact-input" placeholder="Subjek" />
-          <textarea class="contact-input resize-none" rows="5" placeholder="Pesan Anda..."></textarea>
-          <div>
-            <button class="send-btn" onclick="sendContact()">Kirim Pesan →</button>
-          </div>
-          <div id="contact-success" class="hidden text-sm text-green-600 font-medium pt-1">✓ Pesan berhasil dikirim! Saya akan segera menghubungi Anda.</div>
-        </div>
       </div>
-    </div>
+
+    </section><!-- /Contact Section -->
 
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-gray-100 bg-white">
-    <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p class="text-xs text-steel">© 2025 Ahmad Yusuf. All rights reserved.</p>
-      <p class="text-xs text-steel"></p>
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="container">
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright</span> <strong class="px-1 sitename">Alex Smith</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you've purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> | <a href="https://bootstrapmade.com/tools/">DevTools</a>
+        </div>
+      </div>
     </div>
   </footer>
-</div>
 
-<script>
-  // ---- STORAGE (localStorage, no database) ----
-  function getAccounts() {
-    try { return JSON.parse(localStorage.getItem('ay_accounts') || '{}'); } catch(e) { return {}; }
-  }
-  function saveAccounts(accounts) {
-    localStorage.setItem('ay_accounts', JSON.stringify(accounts));
-  }
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  // ---- SWITCH FORMS ----
-  function switchToLogin() {
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
-    clearErrors();
-  }
-  function switchToRegister() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
-    clearErrors();
-  }
-  function clearErrors() {
-    ['reg-error','login-error'].forEach(id => {
-      const el = document.getElementById(id);
-      el.style.display = 'none'; el.textContent = '';
-    });
-  }
-  function showError(id, msg) {
-    const el = document.getElementById(id);
-    el.textContent = msg; el.style.display = 'block';
-  }
+  <!-- Preloader -->
+  <div id="preloader"></div>
 
-  // ---- REGISTER ----
-  function handleRegister() {
-    const name  = document.getElementById('reg-name').value.trim();
-    const email = document.getElementById('reg-email').value.trim();
-    const pass  = document.getElementById('reg-pass').value;
-    const pass2 = document.getElementById('reg-pass2').value;
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-    if (!name || !email || !pass || !pass2) return showError('reg-error', 'Semua field wajib diisi.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('reg-error', 'Format email tidak valid.');
-    if (pass.length < 6) return showError('reg-error', 'Password minimal 6 karakter.');
-    if (pass !== pass2) return showError('reg-error', 'Konfirmasi password tidak cocok.');
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
 
-    const accounts = getAccounts();
-    if (accounts[email]) return showError('reg-error', 'Email sudah terdaftar. Silakan login.');
-
-    accounts[email] = { name, password: pass };
-    saveAccounts(accounts);
-
-    // auto-fill login & switch
-    document.getElementById('login-email').value = email;
-    document.getElementById('login-pass').value = '';
-    switchToLogin();
-
-    // show success toast
-    showToast('Akun berhasil dibuat! Silakan login.');
-  }
-
-  // ---- LOGIN ----
-  function handleLogin() {
-    const email = document.getElementById('login-email').value.trim();
-    const pass  = document.getElementById('login-pass').value;
-
-    if (!email || !pass) return showError('login-error', 'Email dan password wajib diisi.');
-
-    const accounts = getAccounts();
-    if (!accounts[email]) return showError('login-error', 'Email belum terdaftar. Silakan daftar.');
-    if (accounts[email].password !== pass) return showError('login-error', 'Password salah. Coba lagi.');
-
-    document.getElementById('login-page').style.display = 'none';
-    const pp = document.getElementById('portfolio-page');
-    pp.style.display = 'block';
-    pp.style.opacity = '0';
-    setTimeout(() => { pp.style.transition = 'opacity 0.5s'; pp.style.opacity = '1'; }, 50);
-    animateSkills();
-  }
-
-  // ---- TOAST ----
-  function showToast(msg) {
-    const t = document.createElement('div');
-    t.textContent = msg;
-    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1A1A2E;color:white;padding:12px 24px;border-radius:4px;font-size:13px;z-index:9999;font-family:DM Sans,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,0.2);';
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 3000);
-  }
-
-  // Enter key
-  document.addEventListener('keydown', function(e) {
-    if (e.key !== 'Enter') return;
-    if (document.getElementById('login-page').style.display === 'none') return;
-    if (document.getElementById('login-form').style.display !== 'none') handleLogin();
-    else handleRegister();
-  });
-
-  // Check if any account exists — show login directly if yes
-  window.addEventListener('DOMContentLoaded', function() {
-    const accounts = getAccounts();
-    if (Object.keys(accounts).length > 0) switchToLogin();
-  });
-
-  function logout() {
-    document.getElementById('portfolio-page').style.display = 'none';
-    const lp = document.getElementById('login-page');
-    lp.style.display = 'flex';
-    // clear fields
-    ['reg-name','reg-email','reg-pass','reg-pass2','login-email','login-pass'].forEach(id => {
-      const el = document.getElementById(id); if(el) el.value = '';
-    });
-    clearErrors();
-    // show login if account exists, otherwise register
-    const accounts = getAccounts();
-    if (Object.keys(accounts).length > 0) switchToLogin();
-    else switchToRegister();
-  }
-
-  // ---- NAVIGATION ----
-  function showSection(name, el) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-    const sec = document.getElementById('section-' + name);
-    if (sec) { sec.classList.add('active'); sec.style.animation = 'fadeUp 0.5s ease'; }
-    if (el) el.classList.add('active');
-    if (name === 'about') setTimeout(animateSkills, 300);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function toggleMobileMenu() {
-    const m = document.getElementById('mobile-menu');
-    m.classList.toggle('hidden');
-  }
-
-  // ---- SKILL BARS ----
-  function animateSkills() {
-    document.querySelectorAll('.skill-fill').forEach(bar => {
-      const w = bar.getAttribute('data-width');
-      setTimeout(() => { bar.style.width = w + '%'; }, 100);
-    });
-  }
-
-  // ---- CONTACT ----
-  function sendContact() {
-    document.getElementById('contact-success').classList.remove('hidden');
-    setTimeout(() => document.getElementById('contact-success').classList.add('hidden'), 4000);
-  }
-</script>
 </body>
+
 </html>
