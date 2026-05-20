@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Logo Partner</title>
+    <style>
+        /* --- STYLE UNTUK SECTION PARTNER --- */
+        .partner-section {
+            padding: 60px 0;
+            background-color: #ffffff; /* Bisa diganti #f8f9fa jika ingin warna abu-abu tipis */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .partner-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 40px;
+        }
+
+        /* Container utama yang menyembunyikan scrollbar */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            /* Memberikan efek pudar (fade) di sisi kiri dan kanan agar terlihat lebih elegan */
+            mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+        }
+
+        /* Group logo yang akan berjalan */
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: space-around;
+            min-width: 100%;
+            gap: 60px; /* Jarak antar logo */
+            padding: 10px 0;
+            
+            /* Memanggil animasi bergulir */
+            animation: scroll-left 25s linear infinite;
+        }
+
+        /* Efek hover: Berhenti berjalan saat kursor diarahkan ke logo */
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+
+        /* Style untuk masing-masing gambar logo */
+        .marquee-content img {
+            height: 45px; /* Sesuaikan tinggi logo perusahaan */
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%); /* Membuat logo menjadi hitam putih/monokrom agar rapi */
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Saat logo di-hover, warnanya akan muncul kembali */
+        .marquee-content img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* --- ANIMASI CSS --- */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION PARTNER START -->
+    <section class="partner-section">
+        <h3 class="partner-title">Telah Dipercaya oleh Berbagai Perusahaan & Mitra Strategis</h3>
+        
+        <div class="marquee-container">
+            <!-- Group Logo 1 -->
+            <div class="marquee-content">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Google" alt="Partner 1">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Microsoft" alt="Partner 2">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Cisco" alt="Partner 3">
+                <img src="https://via.placeholder.com/150x50?text=Logo+AWS" alt="Partner 4">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Oracle" alt="Partner 5">
+                <img src="https://via.placeholder.com/150x50?text=Logo+IBM" alt="Partner 6">
+            </div>
+            
+            <!-- Group Logo 2 (PENTING: Harus sama persis dengan Group 1 agar efek gulungnya tidak putus/seamless) -->
+            <div class="marquee-content" aria-hidden="true">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Google" alt="Partner 1">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Microsoft" alt="Partner 2">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Cisco" alt="Partner 3">
+                <img src="https://via.placeholder.com/150x50?text=Logo+AWS" alt="Partner 4">
+                <img src="https://via.placeholder.com/150x50?text=Logo+Oracle" alt="Partner 5">
+                <img src="https://via.placeholder.com/150x50?text=Logo+IBM" alt="Partner 6">
+            </div>
+        </div>
+    </section>
+    <!-- SECTION PARTNER END -->
+
+</body>
+</html>

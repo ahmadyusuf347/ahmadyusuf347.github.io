@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT Maximus teknologi Indonesia</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. RESET & VARIABLE CSS (PREMIUM TECH STYLE)
+           ========================================================================== */
+        :root {
+            --dark-abyss: #030712;       
+            --electric-blue: #2563eb;    
+            --neon-teal: #10b981;        
+            --slate-light: #f3f4f6;      
+            --text-pure: #ffffff;
+            --text-muted: #9ca3af;
+            --text-dark: #1f2937;
+            --border-line: rgba(255, 255, 255, 0.08);
+            --smooth-curve: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: var(--dark-abyss);
+            color: var(--text-pure);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Komponen Tombol */
+        .btn-tech {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s var(--smooth-curve);
+            border: none;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--electric-blue), #1d4ed8);
+            color: var(--text-pure);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-pure);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Layout Section Global */
+        section {
+            padding: 120px 8% 100px 8%;
+            position: relative;
+        }
+
+        .light-section {
+            background-color: var(--text-pure);
+            color: var(--text-dark);
+        }
+
+        .tagline {
+            color: var(--electric-blue);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .title-large {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .light-section .title-large {
+            color: var(--dark-abyss);
+        }
+
+        .desc-section {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin-bottom: 60px;
+        }
+
+        .light-section .desc-section {
+            color: #4b5563;
+        }
+
+        /* ==========================================================================
+           2. HEADER & FIXED NAVBAR (ANIMASI GARIS HOVER & ANTI PATAH TEKS)
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(3, 7, 18, 0.9);
+            padding: 16px 8%;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .logo {
+            
+            font-weight: 800;
+            color: var(--text-pure);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            z-index: 1005; 
+            white-space: nowrap;
+        }
+
+        
+
+        .nav-list {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-list li {
+            white-space: nowrap; /* BARU: Memastikan tulisan "About Us" dll selalu satu jajar saja */
+        }
+
+        /* BARU: ANIMASI GARIS HOVER MENYEBANG DARI TENGAH */
+        .nav-link {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 20px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--neon-teal));
+            transition: width 0.3s var(--smooth-curve), left 0.3s var(--smooth-curve);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-pure);
+        }
+
+        /* Hamburger Trigger Button */
+        .hamburger-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-pure);
+            font-size: 1.6rem;
+            cursor: pointer;
+            z-index: 1010; 
+            padding: 5px;
+        }
+
+        /* Overlay Gelap Latar Belakang */
+        .glass-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(3, 7, 18, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 998; 
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION (WAVY BACKGROUND)
+           ========================================================================== */
+        #home {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #020617 0%, #0b1536 100%);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 120px 8% 160px 8%; 
+        }
+
+        .hero-container {
+            max-width: 800px;
+            z-index: 10; 
+            position: relative;
+            width: 100%;
+        }
+
+        .hero-container h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .hero-container h1 span {
+            background: linear-gradient(90deg, #60a5fa, var(--neon-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-container p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            max-width: 680px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Wadah Ombak di Bagian Bawah Hero */
+        .wave-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            min-height: 100px;
+            max-height: 150px;
+            z-index: 5;
+            pointer-events: none; 
+        }
+
+        .waves {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin-bottom: -7px; 
+        }
+
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+        }
+        .parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
+        .parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+        .parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
+        .parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; }
+
+        @keyframes move-forever {
+            0% { transform: translate3d(-90px, 0, 0); }
+            100% { transform: translate3d(85px, 0, 0); }
+        }
+
+        /* ==========================================================================
+           4. ABOUT US SECTION
+           ========================================================================== */
+        #about {
+            background-color: var(--text-pure);
+        }
+
+        .about-flex {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .about-content-left {
+            flex: 1.2;
+        }
+
+        .about-content-left h3 {
+            font-size: 1.8rem;
+            color: var(--dark-abyss);
+            margin-bottom: 15px;
+        }
+
+        .about-content-left p {
+            color: #4b5563;
+            margin-bottom: 25px;
+        }
+
+        .badge-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .badge-box {
+            padding: 20px;
+            background-color: var(--slate-light);
+            border-radius: 8px;
+        }
+
+        .badge-box h5 {
+            font-size: 1.1rem;
+            color: var(--dark-abyss);
+            margin-bottom: 5px;
+        }
+
+        .badge-box p {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 0;
+        }
+
+        .about-graphic-right {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .photo-card {
+            background-color: var(--dark-abyss);
+            padding: 30px 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: var(--text-pure);
+        }
+
+        .photo-card i {
+            font-size: 2rem;
+            color: var(--neon-teal);
+            margin-bottom: 15px;
+        }
+
+        /* ==========================================================================
+           5. SERVICES SECTION 
+           ========================================================================== */
+        #services {
+            background-color: #090f24;
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .card-tech {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-line);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: all 0.3s var(--smooth-curve);
+        }
+
+        .card-tech:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--electric-blue);
+            transform: translateY(-5px);
+        }
+
+        .card-tech i {
+            font-size: 2.2rem;
+            color: var(--electric-blue);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .card-tech h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .card-tech p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           6. PORTFOLIO SECTION
+           ========================================================================== */
+        #portfolio {
+            background-color: var(--dark-abyss);
+        }
+
+        .portfolio-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-block {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-line);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .img-block-holder {
+            height: 230px;
+            overflow: hidden;
+        }
+
+        .img-block-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-block:hover .img-block-holder img {
+            transform: scale(1.05);
+        }
+
+        .text-block-holder {
+            padding: 25px;
+        }
+
+        .text-block-holder span {
+            font-size: 0.8rem;
+            color: var(--neon-teal);
+            font-weight: 600;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .text-block-holder h4 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .text-block-holder p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           7. CONTACT SECTION
+           ========================================================================== */
+        #contact {
+            background-color: #090f24;
+        }
+
+        .contact-flexbox {
+            display: flex;
+            gap: 50px;
+        }
+
+        .details-pane {
+            flex: 1;
+        }
+
+        .details-pane h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .details-pane p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .contact-card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .row-info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .row-info-item i {
+            font-size: 1.2rem;
+            color: var(--electric-blue);
+            background-color: rgba(37, 99, 235, 0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .row-info-item div h5 {
+            font-size: 0.95rem;
+            color: var(--text-pure);
+        }
+
+        .row-info-item div p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-pane {
+            flex: 1.2;
+            background-color: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-line);
+            padding: 40px;
+            border-radius: 12px;
+        }
+
+        .input-row {
+            margin-bottom: 20px;
+        }
+
+        .input-row label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-line);
+            border-radius: 8px;
+            color: var(--text-pure);
+            font-size: 0.95rem;
+        }
+
+        .field-input:focus {
+            outline: none;
+            border-color: var(--electric-blue);
+        }
+
+        /* ==========================================================================
+           8. FOOTER
+           ========================================================================== */
+        footer {
+            background-color: var(--dark-abyss);
+            padding: 60px 8% 30px 8%;
+            border-top: 1px solid var(--border-line);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-grid-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-line);
+        }
+
+        .footer-menu-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .footer-menu-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-menu-links a:hover {
+            color: var(--text-pure);
+        }
+
+        .bottom-copyright {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* ==========================================================================
+           9. MEDIA QUERIES REVISI: PREMANENT PERFECT CENTER ALIGNMENT FOR MOBILE
+           ========================================================================== */
+        @media (max-width: 992px) {
+            section { padding: 90px 6% 70px 6%; }
+            header { padding: 20px 6%; }
+            .about-flex, .contact-flexbox { flex-direction: column; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 16px 6%; }
+            header.scrolled { padding: 12px 6%; }
+
+            .hamburger-toggle {
+                display: block; 
+            }
+
+            /* NAV MENU SIKU PANEL MOBILE (KIRI KE KANAN ATAU KANAN KE KIRI) */
+            .nav-list {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 290px;
+                height: 100vh;
+                background-color: #0b1329;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 100px 40px;
+                gap: 25px;
+                z-index: 999; 
+                box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+                transition: right 0.4s cubic-bezier(0.1, 0.8, 0.3, 1);
+            }
+
+            .nav-list.active {
+                right: 0; 
+            }
+
+            .nav-link {
+                font-size: 1.1rem;
+                width: 100%;
+                display: block;
+                padding: 5px 0;
+                color: #ffffff;
+            }
+            
+            /* Nonaktifkan garis hover sliding di HP agar tidak merusak layout */
+            .nav-link::after { display: none; }
+
+            /* ==================================================================
+               KUNCI REVISI: ELEMEN MENJADI PRESISI DI TENGAH LAYAR HP
+               ================================================================== */
+            #home {
+                padding: 130px 6% 120px 6%; 
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .hero-container {
+                text-align: center; /* Teks otomatis rata tengah murni */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+            }
+
+            .hero-container h1 { 
+                font-size: 2.1rem; 
+                line-height: 1.25;
+                margin-bottom: 15px;
+            }
+            
+            .hero-container p {
+                font-size: 0.95rem;
+                margin-bottom: 30px;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons { 
+                flex-direction: column; 
+                gap: 12px;
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .hero-buttons .btn-tech {
+                width: 100%; 
+                max-width: 320px; /* Lebar tombol ideal di genggaman HP */
+            }
+
+            /* Bagian Judul Sesi Lain di HP Rata Tengah */
+            .section-header-box {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tagline, .title-large, .desc-section {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .title-large { font-size: 1.85rem; }
+
+            .wave-wrapper { height: 60px; } 
+            
+            .badge-grid, .about-graphic-right {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+
+            .about-content-left h3, .details-pane h3 {
+                text-align: center;
+            }
+
+            .footer-grid-wrap {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-menu-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* --- STYLE UNTUK SECTION PARTNER --- */
+        .partner-section {
+            padding: 60px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .partner-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 40px;
+        }
+
+        /* Container utama yang menyembunyikan scrollbar */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            /* Memberikan efek pudar (fade) di sisi kiri dan kanan agar terlihat lebih elegan */
+            mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+        }
+
+        /* Group logo yang akan berjalan */
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: space-around;
+            min-width: 100%;
+            gap: 60px; /* Jarak antar logo */
+            padding: 10px 0;
+            
+            /* Memanggil animasi bergulir */
+            animation: scroll-left 25s linear infinite;
+        }
+
+        /* Efek hover: Berhenti berjalan saat kursor diarahkan ke logo */
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+
+        /* Style untuk masing-masing gambar logo */
+        .marquee-content img {
+            height: 40px; /* Sesuaikan tinggi logo perusahaan */
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(0%); /* Membuat logo menjadi hitam putih/monokrom agar rapi */
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Saat logo di-hover, warnanya akan muncul kembali */
+        .marquee-content img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* --- ANIMASI CSS --- */
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-overlay" id="glassOverlay"></div>
+
+    <header id="navbarMain">
+        <a href="#home" class="logo">
+    <img src="Logo.png" alt="" style="width: 170px; height: auto;">
+</a>
+        
+        <ul class="nav-list" id="navList">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About Us</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li style="width: 100%; margin-top: 10px;"><a href="support.html" class="btn-tech btn-primary" style="display: block; width: 100%;">Support</a></li>
+        </ul>
+
+        <button class="hamburger-toggle" id="hamburgerToggleBtn" aria-label="Buka Menu">
+            <i class="fa-solid fa-bars" id="toggleIcon"></i>
+        </button>
+    </header>
+
+    <section id="home">
+        <div class="hero-container"><br>
+            <span class="tagline">Next-Gen IT House</span>
+            <h1>Arsitektur IT Andal untuk Efisiensi  <span>Bisnis Maksimal.</span></h1>
+            <p>Kami mengurai kompleksitas teknologi menjadi solusi integrasi yang cerdas, aman, dan mudah dikelola. Konsultan strategis dan integrator sistem berpengalaman untuk memastikan seluruh teknologi Anda bekerja selaras menuju satu tujuan</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn-tech btn-primary">Lihat Solusi IT</a>
+                <a href="#contact" class="btn-tech btn-ghost">Konsultasi Cetak Biru</a>
+            </div>
+        </div>
+
+        <div class="wave-wrapper">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(37, 99, 235, 0.2)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(16, 185, 129, 0.2)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(3, 7, 18, 0.4)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#ffffff" />
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <section id="about" class="light-section">
+        <div class="section-header-box">
+            <span class="tagline">Siapa Kami</span>
+            <h2 class="title-large">Teknologi Handal, Lahir Dari Komitmen Tinggi</h2>
+            <p class="desc-section">Membantu bisnis melangkah melampaui batas konvensional dengan sistem automasi terintegrasi.</p>
+        </div>
+        
+        <div class="about-flex">
+            <div class="about-content-left">
+                <h3>Keunggulan Rekayasa Tanpa Batas</h3>
+                <p>ForgeDigital beroperasi sebagai agensi solusi teknologi terintegrasi di Jakarta. Kami fokus membantu percepatan efisiensi produk perangkat lunak korporasi digital agar siap bersaing di pasar modern.</p>
+                <div class="badge-grid">
+                    <div class="badge-box">
+                        <h5>Fokus Skalabilitas</h5>
+                        <p>Kami memastikan sistem siap melayani jutaan pengguna tanpa kendala latensi.</p>
+                    </div>
+                    <div class="badge-box">
+                        <h5>Agile Development</h5>
+                        <p>Dapatkan visibilitas progres pengerjaan sistem secara transparan setiap minggu.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-graphic-right">
+                <div class="photo-card">
+                    <i class="fa-solid fa-code-merge"></i>
+                    <h4>99.8%</h4>
+                    <p>Keberhasilan Deploy</p>
+                </div>
+                <div class="photo-card" style="background-color: var(--electric-blue);">
+                    <i class="fa-solid fa-user-group" style="color: white;"></i>
+                    <h4>25+</h4>
+                    <p>Senior Engineer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-header-box">
+            <span class="tagline">Keahlian Kami</span>
+            <h2 class="title-large">Layanan Rekayasa Digital</h2>
+            <p class="desc-section">Solusi komprehensif dari hulu ke hilir untuk memperkuat sistem data internal operasional perusahaan Anda.</p>
+        </div>
+        
+        <div class="grid-cards">
+            <div class="card-tech">
+                <i class="fa-solid fa-terminal"></i>
+                <h4>Custom Software Engineering</h4>
+                <p>Membangun microservices arsitektur, platform web korporasi, serta aplikasi seluler native dengan performa komputasi tinggi.</p>
+            </div>
+            <div class="card-tech">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <h4>Enterprise Cloud & DevOps</h4>
+                <p>Otomatisasi infrastruktur menggunakan Terraform, tata kelola Kubernetes cluster, serta penghematan biaya resource cloud.</p>
+            </div>
+            <div class="card-tech">
+                <i class="fa-solid fa-user-shield"></i>
+                <h4>Cyber & Data Security</h4>
+                <p>Implementasi enkripsi hulu ke hilir, audit penetration test sistem secara berkala, dan mitigasi serangan ransomware.</p>
+            </div>
+            <div class="card-tech">
+                <i class="fa-solid fa-bezier-curve"></i>
+                <h4>Sistem Integrasi API</h4>
+                <p>Menghubungkan ekosistem aplikasi lama perusahaan dengan core system baru pihak ketiga secara aman dan minim latensi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="section-header-box">
+            <span class="tagline">Studi Kasus Produk</span>
+            <h2 class="title-large">Ekosistem yang Telah Kami Selesaikan</h2>
+            <p class="desc-section">Kumpulan rekayasa sistem nyata yang kami bangun untuk menyederhanakan proses bisnis rumit.</p>
+        </div>
+        
+        <div class="portfolio-masonry">
+            <div class="portfolio-block">
+                <div class="img-block-holder">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&q=80" alt="DevOps Tech">
+                </div>
+                <div class="text-block-holder">
+                    <span>Cloud Architecture</span>
+                    <h4>Arsitektur Cloud Otomotif Nasional</h4>
+                    <p>Restrukturisasi arsitektur server terdistribusi untuk melayani pencatatan stok supply-chain dealer di Jakarta.</p>
+                </div>
+            </div>
+            <div class="portfolio-block">
+                <div class="img-block-holder">
+                    <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=600&q=80" alt="Cyber security">
+                </div>
+                <div class="text-block-holder">
+                    <span>Data Engineering</span>
+                    <h4>Sistem Kliring Keamanan Enkripsi</h4>
+                    <p>Menerapkan pengamanan perimeter end-to-end data sensitif transaksi kargo pelabuhan logistik internasional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PARTNER START -->
+    <section class="partner-section">
+        <h3 class="partner-title">Partner</h3>
+        
+        <div class="marquee-container">
+    <!-- Group Logo 1 -->
+    <div class="marquee-content">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Hewlett_Packard_Enterprise_logo.svg" alt="Hpe">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
+    </div>
+    
+    <!-- Group Logo 2 (Harus sama persis) -->
+    <div class="marquee-content" aria-hidden="true">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Hewlett_Packard_Enterprise_logo.svg" alt="Hpe">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
+    </div>
+</div>
+    </section>
+    <!-- SECTION PARTNER END -->
+
+    <section id="contact">
+        <div class="section-header-box">
+            <span class="tagline">Mulai Kolaborasi</span>
+            <h2 class="title-large">Diskusikan Kebutuhan Teknis Anda</h2>
+            <p class="desc-section">Konsultasikan kendala arsitektur sistem Anda langsung dengan Tech Lead kami.</p>
+        </div>
+        
+        <div class="contact-flexbox">
+            <div class="details-pane">
+                <h3>Hubungi Kantor Representatif</h3>
+                <p>Kami siap menyusun strategi teknologi terbaik yang efisien dan hemat biaya bagi kelangsungan bisnis Anda.</p>
+                
+                <div class="contact-card-info">
+                    <div class="row-info-item">
+                        <i class="fa-solid fa-map-location"></i>
+                        <div>
+                            <h5>Head Office</h5>
+                            <p>Jalan Kebagusan Raya No 200T, Kebagusan, Pasar Minggu, Jakarta Selatan.</p>
+                        </div>
+                    </div>
+                    <div class="row-info-item">
+                        <i class="fa-solid fa-headset"></i>
+                        <div>
+                            <h5>Layanan</h5>
+                            <p>Monday - Friday (Office Hour) <br>+62 8561507488</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-pane">
+                <form onsubmit="event.preventDefault(); alert('Formulir terkirim! Tim Tech Lead kami akan menjadwalkan sesi meeting koordinasi.');">
+                    <div class="input-row">
+                        <label for="fName">Nama Lengkap</label>
+                        <input type="text" id="fName" class="field-input" placeholder="Nama Lengkap" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="fEmail">Email</label>
+                        <input type="email" id="fEmail" class="field-input" placeholder="Tuliskan email anda" required>
+                    </div>
+                    <div class="input-row">
+                        <label for="fMsg">Spesifikasi Kebutuhan IT</label>
+                        <textarea id="fMsg" class="field-input" style="height: 120px; resize: none;" placeholder="Tulis rincian masalah teknologi..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-tech btn-primary" style="width: 100%;">Ajukan Sesi Konsultasi</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid-wrap">
+            <a href="#home">
+                <img src="Logo.png" alt="" style="width: 170px; height: auto;">
+            </a>
+            <ul class="footer-menu-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="bottom-copyright">
+            <p>&copy; 2026  PT Maximus Teknologi Indonesia. Hak Cipta Dilindungi.</p>
+            <p>Dibuat dengan  &hearts; oleh Ahmad Yusuf </p>
+        </div>
+    </footer>
+
+    <script>
+        const navbarMain = document.getElementById('navbarMain');
+        const hamburgerToggleBtn = document.getElementById('hamburgerToggleBtn');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const navList = document.getElementById('navList');
+        const glassOverlay = document.getElementById('glassOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('section');
+
+        // --- 1. MENGUBAH BACKGROUND NAVBAR SAAT DI-SCROLL ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                navbarMain.classList.add('scrolled');
+            } else {
+                navbarMain.classList.remove('scrolled');
+            }
+        });
+
+        // --- 2. LOGIKA SIDEBAR MENU MOBILE ---
+        function toggleMobileSidebar() {
+            navList.classList.toggle('active');
+            glassOverlay.classList.toggle('show');
+            
+            if (navList.classList.contains('active')) {
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-xmark');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                toggleIcon.classList.remove('fa-xmark');
+                toggleIcon.classList.add('fa-bars');
+                document.body.style.overflow = 'auto';  
+            }
+        }
+
+        hamburgerToggleBtn.addEventListener('click', toggleMobileSidebar);
+        glassOverlay.addEventListener('click', toggleMobileSidebar);
+
+        // --- 3. MENUTUP SIDEBAR OTOMATIS SAAT LINK MENU DIKLIK ---
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navList.classList.contains('active')) {
+                    toggleMobileSidebar();
+                }
+            });
+        });
+
+        // --- 4. INDIKATOR LINK NAVBAR AKTIF SESUAI SCROLL ---
+        window.addEventListener('scroll', () => {
+            let activeId = '';
+            
+            contentSections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= (sectionTop - 160)) {
+                    activeId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${activeId}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Dukungan & Kontak Form - Hubungi Kami</title>
+    <style>
+        /* Base Reset & Design Variables */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary-color: #0f0580; /* Teal gelap yang profesional */
+            --primary-hover: #0a00c4;
+            --bg-color: #e9e9e9;      /* Latar belakang bernuansa cerah & segar */
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #475569;
+            --border-color: #cbd5e1;
+            --focus-ring: rgba(15, 118, 110, 0.25);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px 16px;
+        }
+
+        /* Container Card */
+        .support-card {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 580px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(15, 118, 110, 0.08);
+        }
+
+        /* Header & Logo */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        }
+
+        .logo-container svg {
+            width: 42px;
+            height: 42px;
+            fill: var(--primary-color);
+        }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Form Grouping */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        /* Form Controls */
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: #ffffff;
+            color: var(--text-color);
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-control::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px var(--focus-ring);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 130px;
+            line-height: 1.5;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(15, 118, 110, 0.15);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+            box-shadow: 0 6px 12px -2px rgba(15, 118, 110, 0.25);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        /* Footer & Copyright */
+        .footer-text {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 500px) {
+            .support-card {
+                padding: 28px 20px;
+                border-radius: 12px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .header p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="support-card">
+        <!-- Header & Logo -->
+        <div class="header">
+            <div class="logo-container">
+                <!-- SVG Icon Logo (Bisa disesuaikan atau diganti tag <img>) -->
+                <img src="Logo Maximus-08.png" alt="Logo Maximus" style="height: 100px; width: auto;">
+            </div>
+            <h1>Support</h1>
+            <h4>PT Maximus Teknologi Indonesia</h4>
+            
+        </div>
+
+        <!-- 
+            FORM SUBMISSION GUIDE:
+            Ganti 'GANTI_DENGAN_ID_FORMSPREE_ANDA' dengan ID form yang Anda dapatkan secara gratis dari formspree.io
+            Layanan ini akan otomatis memproses data input dan mengirimkannya langsung ke alamat email Anda.
+        -->
+        <form action="https://formspree.io/f/GANTI_DENGAN_ID_FORMSPREE_ANDA" method="POST">
+            
+            <!-- Nama Lengkap -->
+            <div class="form-group">
+                <label for="name">Nama Lengkap</label>
+                <input type="text" id="name" name="Nama" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+            </div>
+
+            <!-- Alamat Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="Email_Pengirim" class="form-control" placeholder="Masukan email anda" required>
+            </div>
+
+            <!-- Kategori Kendala -->
+            <div class="form-group">
+                <label for="category">Kategori Masalah</label>
+                <select id="category" name="Kategori" class="form-control" required>
+                    <option value="" disabled selected>Pilih kategori masalah...</option>
+                    <option value="Teknis / Bug">Masalah Teknis atau Bug</option>
+                    <option value="Akun / Akses">Kendala Login & Akses Akun</option>
+                    <option value="Tagihan / Billing">Pertanyaan Tagihan & Pembayaran</option>
+                    <option value="Kemitraan">Penawaran & Kemitraan Bisnis</option>
+                    <option value="Lainnya">Pertanyaan Umum Lainnya</option>
+                </select>
+            </div>
+
+            <!-- Detail Pesan -->
+            <div class="form-group">
+                <label for="message">Detail Pesan / Pertanyaan</label>
+                <textarea id="message" name="Isi_Pesan" class="form-control" placeholder="Tuliskan kendala Anda secara lengkap di sini agar kami dapat memberikan solusi terbaik..." required></textarea>
+            </div>
+
+            <!-- Tombol Submit -->
+            <button type="submit" class="btn-submit">Kirim Pesan</button>
+        </form>
+
+        <!-- Footer -->
+        <div class="footer-text">
+            <p>&copy; 2026 PT. Maximus Teknologi Indonesia. Hak Cipta Dilindungi.</p>
+        </div>
+    </div>
+
+</body>
+</html>
